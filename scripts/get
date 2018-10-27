@@ -1,0 +1,4 @@
+#!/bin/sh
+
+cd tracks
+cat index.txt | xargs wget -i

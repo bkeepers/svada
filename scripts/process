@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+cd tracks
+
+for file in $(ls | grep -E '^\w{32}$'); do
+  echo "processing $file"
+  ruby process.rb $file
+done
