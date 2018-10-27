@@ -46,7 +46,7 @@ async function initMap() {
     return response.json()
   }))
 
-  tracks.sort((a, b) => Date.parse(a.date) - Date.parse(b.date)).forEach(track => {
+  tracks.sort((a, b) => Date.parse(a.date).valueOf() - Date.parse(b.date).valueOf()).forEach(track => {
     var path = lastPoint ? [lastPoint].concat(track.coordinates) : track.coordinates
     var segment = new google.maps.Polyline({
         path,
