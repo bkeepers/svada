@@ -46,7 +46,8 @@ async function initMap() {
     return response.json()
   }))
 
-  tracks.sort((a, b) => Date.parse(a.date).valueOf() - Date.parse(b.date).valueOf()).forEach(track => {
+  tracks.sort((a, b) => dateFromString(a.date) - dateFromString(b.date)).forEach(track => {
+    console.log(dateFromString(track.date))
     var path = lastPoint ? [lastPoint].concat(track.coordinates) : track.coordinates
     var segment = new google.maps.Polyline({
         path,
@@ -86,4 +87,9 @@ async function initMap() {
   map.fitBounds(bounds);
   map.panToBounds(bounds);
 
+}
+
+function dateFromString(str) {
+  var a = str.split(/[^0-9]/).map(s => Number(s));
+  return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
 }
